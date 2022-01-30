@@ -12,14 +12,14 @@ import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 import org.jetbrains.annotations.NotNull;
 
 public class UI implements Screen, NativeKeyListener {
-    private FlashTimers app;
+    private final FlashTimers app;
 
 
-    private Texture TOP;
-    private Texture JGL;
-    private Texture MID;
-    private Texture ADC;
-    private Texture SUP;
+    private final Texture TOP;
+    private final Texture JGL;
+    private final Texture MID;
+    private final Texture ADC;
+    private final Texture SUP;
 
     private int TOP_TIME;
     private int JGL_TIME;
@@ -28,8 +28,7 @@ public class UI implements Screen, NativeKeyListener {
     private int SUP_TIME;
 
     private float timeBuffer;
-    private BitmapFont font;
-    private NativeKeyListener listener;
+    private final BitmapFont font;
 
     public UI (FlashTimers app) {
         this.app = app;
@@ -51,7 +50,7 @@ public class UI implements Screen, NativeKeyListener {
                 "ubuntu.fnt"),
                 Gdx.files.internal("ubuntu_0.png"),
                 false);
-        listener = new NativeKeyListener() {
+        NativeKeyListener listener = new NativeKeyListener() {
             @Override
             public void nativeKeyPressed(@NotNull NativeKeyEvent e) {
                 if (e.getKeyCode() == NativeKeyEvent.VC_F6) {
@@ -94,17 +93,23 @@ public class UI implements Screen, NativeKeyListener {
 
         app.batch.setProjectionMatrix(app.cam.combined);
         app.batch.begin();
-        app.batch.draw(TOP,240,365, 64,64);
-        font.draw(app.batch, Time.formatTime(TOP_TIME), 320, 410);
-        app.batch.draw(JGL,240,285, 64,64);
-        font.draw(app.batch, Time.formatTime(JGL_TIME), 320, 330);
-        app.batch.draw(MID,240,205, 64,64);
-        font.draw(app.batch, Time.formatTime(MID_TIME), 320, 250);
-        app.batch.draw(ADC,240,125, 64,64);
-        font.draw(app.batch, Time.formatTime(ADC_TIME), 320, 170);
-        app.batch.draw(SUP,240,45, 64,64);
-        font.draw(app.batch, Time.formatTime(SUP_TIME), 320, 90);
-
+        app.batch.draw(TOP,255,365, 64,64);
+        app.batch.draw(JGL,255,285, 64,64);
+        app.batch.draw(MID,255,205, 64,64);
+        app.batch.draw(ADC,255,125, 64,64);
+        app.batch.draw(SUP,255,45, 64,64);
+        font.getData().setScale(1f);
+        font.draw(app.batch, Time.formatTime(TOP_TIME), 335, 412);
+        font.draw(app.batch, Time.formatTime(JGL_TIME), 335, 332);
+        font.draw(app.batch, Time.formatTime(MID_TIME), 335, 252);
+        font.draw(app.batch, Time.formatTime(ADC_TIME), 335, 172);
+        font.draw(app.batch, Time.formatTime(SUP_TIME), 335, 92);
+        font.getData().setScale(0.4f);
+        font.draw(app.batch, "F6", 225, 408);
+        font.draw(app.batch, "F7", 225, 328);
+        font.draw(app.batch, "F8", 225, 248);
+        font.draw(app.batch, "F9", 225, 168);
+        font.draw(app.batch, "F10", 215, 88);
         app.batch.end();
     }
 
