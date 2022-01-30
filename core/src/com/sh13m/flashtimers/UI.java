@@ -47,8 +47,10 @@ public class UI implements Screen, NativeKeyListener {
         SUP_TIME = 0;
 
         timeBuffer = 0;
-        font = new BitmapFont();
-        font.getData().setScale(2.5f);
+        font = new BitmapFont(Gdx.files.internal(
+                "ubuntu.fnt"),
+                Gdx.files.internal("ubuntu_0.png"),
+                false);
         listener = new NativeKeyListener() {
             @Override
             public void nativeKeyPressed(@NotNull NativeKeyEvent e) {
